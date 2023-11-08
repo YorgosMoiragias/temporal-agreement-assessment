@@ -5,7 +5,7 @@ from scipy.cluster import hierarchy
 from numpy import linalg as LA
 from itertools import compress
 import matplotlib.pyplot as plt
-
+import os
 
 def remove_assessors(csv_ratings, AssessorsToBeRemoved, write):
     """
@@ -292,5 +292,10 @@ def visualize(x, assessors, assessors_in_agreement, assessors_in_disagreement, e
         ax[1].plot(timestamps,envelopment_track_ass.tolist(),color='red')
         ax[1].set_ylim([0,100])
 
-    plt.savefig('plot_{}.png'.format(i))
+    # Get the parent directory's path
+    parent_dir_path = os.path.dirname(os.path.realpath(__file__))
+    # Select the folder where the figures will be saved
+    figures_folder_path = os.path.join(parent_dir_path, "Temporal Envelopment Data")
+    # Save figures
+    plt.savefig(os.path.join(figures_folder_path,'plot_{}.png'.format(i)))
     plt.show()
