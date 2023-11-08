@@ -27,8 +27,12 @@ def remove_assessors(csv_ratings, AssessorsToBeRemoved, write):
         assessorToBeRemoved=AssessorsToBeRemoved[i]
         for j in range(len(assessorToBeRemoved)):
             dataframe.drop(dataframe[(dataframe['rating_stimulus'] ==i) & (dataframe['name'] == assessorToBeRemoved[j])].index, inplace=True)
-    if write:        
-        dataframe.to_csv("Updated_TemporalRatings.csv",index=False,header = True)
+    if write:
+        # Get the parent directory's path
+        parent_dir_path = os.path.dirname(os.path.realpath(__file__))
+        # Select the folder where the figures will be saved
+        ratings_folder_path = os.path.join(parent_dir_path, "Temporal Envelopment Data")        
+        dataframe.to_csv(os.path.join(ratings_folder_path, "Updated_TemporalRatings.csv"),index=False,header = True)
         
     return dataframe
 
