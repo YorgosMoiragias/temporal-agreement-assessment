@@ -7,7 +7,6 @@ from itertools import compress
 import matplotlib.pyplot as plt
 
 
-        
 def remove_assessors(csv_ratings, AssessorsToBeRemoved, write):
     """
     Function for discarding the ratings of the assessors not in agreement with the majority of the listening panel and writing a new csv that contains only the ratings in agreement.
@@ -20,7 +19,6 @@ def remove_assessors(csv_ratings, AssessorsToBeRemoved, write):
     
     Returns:
     dataframe (pandas DataFrame): The updated csv that contains all the temporal intensity ratings, except for those of the assessors in AssessorsToBeRemoved, in DataFrame form.
-
     """ 
     # Read the csv file as a pandas DataFrame     
     dataframe=pd.read_csv(csv_ratings)
@@ -186,8 +184,8 @@ def agreement_evaluation(csv_ratings, show):
         AssessorToHold[i]=tobeheld
 
         #  Visualize results
-        if show:           
-            visualize(modified_eigvecs, assessors, tobeheld, toberemoved,dataframe[dataframe['rating_stimulus']==i])
+        if show:      
+            visualize(modified_eigvecs, assessors, tobeheld, toberemoved,dataframe[dataframe['rating_stimulus']==i],i)
 
     return AssessorToHold, AssessorToRemove
 
@@ -235,7 +233,7 @@ def most_frequent(List):
     return num
 
 
-def visualize(x, assessors, assessors_in_agreement, assessors_in_disagreement, envelopment_track):
+def visualize(x, assessors, assessors_in_agreement, assessors_in_disagreement, envelopment_track,i):
     """
     Function for visualizing the non-centered eigenvectors of the temporal ratings of a single track
     and the respective temporal ratings.
@@ -255,6 +253,7 @@ def visualize(x, assessors, assessors_in_agreement, assessors_in_disagreement, e
     ncPCA_Disagree=ncPCA.filter(items=assessors_in_disagreement)
 
     # Plot modified eigenvectors of removed and hold assessors
+    
     fig, ax=plt.subplots(1, 2)
     fig.set_size_inches(14,7)
     ax[0].set_xlabel('Modified PC1',fontsize=20)
@@ -292,3 +291,6 @@ def visualize(x, assessors, assessors_in_agreement, assessors_in_disagreement, e
         envelopment_track_ass=envelopment_track_ass['rating_score']
         ax[1].plot(timestamps,envelopment_track_ass.tolist(),color='red')
         ax[1].set_ylim([0,100])
+
+    plt.savefig('plot_{}.png'.format(i))
+    plt.show()
