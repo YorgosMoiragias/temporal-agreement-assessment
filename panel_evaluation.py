@@ -30,7 +30,7 @@ def remove_assessors(csv_ratings, AssessorsToBeRemoved, write):
     if write:
         # Get the parent directory's path
         parent_dir_path = os.path.dirname(os.path.realpath(__file__))
-        # Select the folder where the figures will be saved
+        # Select the folder where the updated csv will be saved
         ratings_folder_path = os.path.join(parent_dir_path, "Temporal Envelopment Data")        
         dataframe.to_csv(os.path.join(ratings_folder_path, "Updated_TemporalRatings.csv"),index=False,header = True)
         
