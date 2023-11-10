@@ -15,9 +15,11 @@ You will need at least python 3.9. See requirements.txt for the required package
 ## Usage
 The module __panel_evaluation.py__ contains all the necessary functions and is accompanied with a thorough description of each function.
 Function __agreement_evaluation__ is the main function, performing the non-centered PC decomposition of the temporal ratings and the outlier detection algorithm, and outputs the assessors that are in agreement and those who are not.
+
 Function __remove_assessors__ removes the ratings of the inconsistent assessors from the csv that contains all the temporal ratings obtained during the listening test procedure.
 
 The script __demo.py__ can be used for evaluating the efficacy of the proposed methodology on test data (__Demo_Temporal_Envelopment_Assessment.csv__) located in the folder __Temporal Envelopment Data__.
+
 Running __demo.py__ will generate a new csv file on the same folder that contains only the ratings of the assessors in agreement, along with three figures (one for each of the three sound stimuli).
 The figures depict the eigenvectors of the ratings of the assessors in the two-dimensional PC space and the respective temporal ratings. The ratings of the consistent assessors are noted in blue, while those of the inconsistent assessors in red. 
 
